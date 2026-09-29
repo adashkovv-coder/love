@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Наша вселенная</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ БАЗА ============ */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:#050510;
+  color:#efece5;
+  font-family:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::selection{background:#e0c9a6;color:#050510;}
+
+/* ============ ФОНОВЫЕ ЗВЁЗДЫ ============ */
+.stars-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(78,68,140,.28), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(140,68,110,.22), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(30,40,80,.35), transparent 70%),
+    #050510;
+}
+.stars{position:absolute;inset:0;}
+.star{
+  position:absolute;background:#fff;border-radius:50%;
+  box-shadow:0 0 4px rgba(255,255,255,.8);
+  animation:twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.2;transform:scale(1);}
+  50%{opacity:.9;transform:scale(1.4);}
+}
+
+/* ============ ОБЩЕЕ ============ */
+.wrap{position:relative;z-index:1;}
+.section{
+  padding:110px 28px;
+  max-width:1100px;margin:0 auto;
+}
+@media(max-width:640px){.section{padding:70px 20px;}}
+
+.eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+  color:#8a8378;text-align:center;margin-bottom:24px;
+}
+.eyebrow::before,.eyebrow::after{
+  content:'';display:inline-block;width:30px;height:1px;
+  background:rgba(224,201,166,.4);vertical-align:middle;margin:0 14px;
+}
+
+.headline{
+  font-family:'Playfair Display',serif;
+  font-weight:500;letter-spacing:-.01em;line-height:1.05;
+  text-align:center;font-size:clamp(38px,6vw,72px);
+  margin-bottom:28px;
+}
+.headline em{
+  font-style:italic;font-weight:400;
+  background:linear-gradient(135deg,#e0c9a6,#e8b4b8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.lead{
+  font-size:17px;line-height:1.75;color:#a8a29a;
+  max-width:600px;margin:0 auto;text-align:center;
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px;position:relative;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,8vw,110px);
+  font-weight:400;letter-spacing:-.02em;line-height:1;
+  margin-bottom:28px;
+}
+.hero h1 em{
+  font-style:italic;display:block;
+  background:linear-gradient(135deg,#e0c9a6,#e8b4b8 60%,#a8c0e0);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero .since{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:13px;letter-spacing:.3em;text-transform:uppercase;
+  color:#8a8378;margin-top:8px;
+}
+.hero .since b{
+  color:#e0c9a6;font-weight:500;
+}
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+  color:#5a544c;animation:bob 2.4s infinite;
+}
+@keyframes bob{
+  0%,100%{transform:translate(-50%,0);}
+  50%{transform:translate(-50%,8px);}
+}
+
+/* ============ MILESTONES ============ */
+.milestones{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-top:60px;
+}
+@media(max-width:720px){.milestones{grid-template-columns:1fr;}}
+.milestone{
+  padding:40px 34px;
+  border:1px solid rgba(224,201,166,.15);
+  border-radius:20px;
+  background:linear-gradient(160deg,rgba(224,201,166,.04),rgba(232,180,184,.02));
+  backdrop-filter:blur(6px);
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+.milestone::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(224,201,166,.5),transparent);
+}
+.milestone:hover{
+  border-color:rgba(224,201,166,.35);
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(224,201,166,.08);
+}
+.ms-label{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  color:#8a8378;margin-bottom:20px;
+}
+.ms-date{
+  font-family:'Playfair Display',serif;
+  font-size:40px;font-weight:500;line-height:1;margin-bottom:12px;
+  color:#efece5;
+}
+.ms-year{color:#e0c9a6;}
+.ms-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:22px;color:#a8c0e0;margin-bottom:8px;
+}
+.ms-note{font-size:13px;color:#7a746c;line-height:1.6;}
+
+/* ============ LIVE COUNTER ============ */
+.counter-block{
+  text-align:center;
+  padding:60px 20px 20px;
+}
+.counter-days{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(96px,20vw,240px);
+  font-weight:500;line-height:.9;letter-spacing:-.04em;
+  background:linear-gradient(180deg,#e0c9a6 0%,#e8b4b8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+  font-variant-numeric:tabular-nums;
+}
+.counter-days-label{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px;letter-spacing:.5em;text-transform:uppercase;
+  color:#8a8378;margin-bottom:52px;
+}
+.counter-hms{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  font-family:'Space Grotesk',sans-serif;
+}
+.hms{
+  min-width:100px;padding:20px 12px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(224,201,166,.12);
+  border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.hms b{
+  font-size:clamp(28px,4vw,40px);font-weight:500;color:#efece5;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.hms span{
+  font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#7a746c;
+}
+
+/* ============ LIGHT YEAR ============ */
+.light-section{
+  text-align:center;padding-top:120px;
+}
+.light-num{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,10vw,120px);
+  font-weight:400;line-height:1;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#a8c0e0,#e0c9a6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin:20px 0 6px;
+  font-variant-numeric:tabular-nums;
+}
+.light-unit{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:13px;letter-spacing:.4em;text-transform:uppercase;
+  color:#8a8378;margin-bottom:52px;
+}
+.light-desc{
+  max-width:640px;margin:0 auto;
+  font-size:17px;line-height:1.8;color:#a8a29a;
+}
+.light-desc b{color:#e0c9a6;font-weight:500;}
+.light-desc em{
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:#e8b4b8;font-size:20px;display:block;margin-top:22px;
+}
+.progress-wrap{max-width:520px;margin:44px auto 0;}
+.progress-info{
+  display:flex;justify-content:space-between;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:#7a746c;margin-bottom:12px;
+}
+.progress-bar{
+  height:3px;background:rgba(224,201,166,.12);border-radius:99px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#e0c9a6,#e8b4b8);
+  border-radius:99px;transition:width 1.6s ease-out;
+}
+
+/* ============ COUNTDOWN ============ */
+.countdown-hero{
+  font-family:'Space Grotesk',sans-serif;
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+  margin-top:56px;
+}
+.cd-cell{
+  min-width:130px;padding:28px 20px;
+  background:linear-gradient(160deg,rgba(224,201,166,.06),rgba(232,180,184,.03));
+  border:1px solid rgba(224,201,166,.14);
+  border-radius:18px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.cd-cell b{
+  font-size:clamp(34px,5vw,52px);font-weight:500;
+  color:#efece5;font-variant-numeric:tabular-nums;letter-spacing:.01em;
+}
+.cd-cell span{
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#7a746c;
+}
+@media(max-width:640px){
+  .cd-cell{min-width:80px;padding:20px 12px;}
+  .countdown-hero{gap:8px;}
+}
+.cd-note{
+  margin-top:38px;font-size:14px;color:#7a746c;
+  font-style:italic;text-align:center;
+  font-family:'Playfair Display',serif;
+}
+
+/* ============ PHRASE ============ */
+.phrase-section{text-align:center;padding:120px 28px 90px;}
+.phrase-display{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:400;
+  font-size:clamp(30px,5.6vw,64px);
+  line-height:1.2;letter-spacing:-.01em;
+  min-height:1.3em;
+  max-width:820px;margin:0 auto 48px;
+  background:linear-gradient(135deg,#efece5,#e0c9a6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  transition:opacity .35s, transform .35s;
+}
+.phrase-display.fade{opacity:0;transform:translateY(8px);}
+.phrase-btn{
+  background:transparent;
+  border:1px solid rgba(224,201,166,.4);
+  color:#e0c9a6;
+  padding:16px 40px;
+  border-radius:99px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px;letter-spacing:.4em;text-transform:uppercase;
+  cursor:pointer;transition:.25s;
+}
+.phrase-btn:hover{
+  background:rgba(224,201,166,.08);
+  border-color:#e0c9a6;
+  transform:translateY(-2px);
+}
+.phrase-btn:active{transform:translateY(0);}
+
+/* ============ FOOTER ============ */
+.footer{
+  text-align:center;padding:80px 24px 60px;
+  border-top:1px solid rgba(224,201,166,.1);
+  margin-top:40px;
+}
+.footer .heart{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:20px;color:#e8b4b8;margin-bottom:20px;
+}
+.footer .sig{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  color:#5a544c;
+}
+.footer .sig b{color:#8a8378;font-weight:500;}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease-out, transform 1s ease-out;}
+.reveal.on{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<div class="stars-bg"><div class="stars" id="stars"></div></div>
+
+<div class="wrap">
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <p class="eyebrow">Наша вселенная</p>
+  <h1>
+    Два сердца,<br>
+    <em>одна орбита</em>
+  </h1>
+  <p class="since">Вместе с <b>4 июля 2025</b></p>
+  <div class="scroll-hint">↓ листай вниз</div>
+</header>
+
+<!-- ================= MILESTONES ================= -->
+<section class="section reveal">
+  <p class="eyebrow">Откуда всё началось</p>
+  <h2 class="headline">Две даты,<br>которые изменили <em>всё</em></h2>
+
+  <div class="milestones">
+    <div class="milestone">
+      <div class="ms-label">День знакомства</div>
+      <div class="ms-date">9 марта<br><span class="ms-year">2025</span></div>
+      <div class="ms-title">Первая встреча</div>
+      <div class="ms-note">Тот день, когда я впервые увидел тебя — и не смог забыть.</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-label">День, когда мы стали «мы»</div>
+      <div class="ms-date">4 июля<br><span class="ms-year">2025</span></div>
+      <div class="ms-title">Начало нас</div>
+      <div class="ms-note">С этого дня время пошло иначе — я стал считать его вместе с тобой.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE COUNTER ================= -->
+<section class="section reveal">
+  <p class="eyebrow">Мы вместе</p>
+  <h2 class="headline">Каждая секунда<br>с <em>тобой</em></h2>
+
+  <div class="counter-block">
+    <div class="counter-days" id="days">0</div>
+    <div class="counter-days-label">дней вместе</div>
+
+    <div class="counter-hms">
+      <div class="hms"><b id="hours">00</b><span>часов</span></div>
+      <div class="hms"><b id="minutes">00</b><span>минут</span></div>
+      <div class="hms"><b id="seconds">00</b><span>секунд</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIGHT ================= -->
+<section class="section light-section reveal">
+  <p class="eyebrow">Световой путь</p>
+  <h2 class="headline">Сколько света<br>улетело за <em>наше время</em></h2>
+
+  <div class="light-num" id="light-years">0.00</div>
+  <div class="light-unit">световых лет</div>
+
+  <p class="light-desc">
+    С того дня, как мы вместе, свет успел улететь на
+    <b id="light-km">0</b> километров.
+    Он уже покинул Солнечную систему. Он летит к другим звёздам
+    со скоростью 299 792 километра в секунду — и всё равно не успевает
+    за моей любовью к тебе.
+    <em>Свету ещё лететь и лететь до ближайшей звезды. А я уже здесь.</em>
+  </p>
+
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span>Путь света к Проксиме Центавра</span>
+      <span id="light-progress">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="light-bar"></div></div>
+  </div>
+</section>
+
+<!-- ================= COUNTDOWN ================= -->
+<section class="section reveal">
+  <p class="eyebrow">Впереди самое важное</p>
+  <h2 class="headline">До того дня,<br>когда мы <em>вместе</em></h2>
+  <p class="lead">1 июня 2028 — день, когда мы переезжаем друг к другу. Уже совсем скоро.</p>
+
+  <div class="countdown-hero">
+    <div class="cd-cell"><b id="cd-days">0</b><span>дней</span></div>
+    <div class="cd-cell"><b id="cd-hours">00</b><span>часов</span></div>
+    <div class="cd-cell"><b id="cd-minutes">00</b><span>минут</span></div>
+    <div class="cd-cell"><b id="cd-seconds">00</b><span>секунд</span></div>
+  </div>
+
+  <p class="cd-note">И это будет только начало нашей истории.</p>
+</section>
+
+<!-- ================= PHRASE ================= -->
+<section class="phrase-section reveal">
+  <p class="eyebrow">Просто напоминание</p>
+  <div class="phrase-display" id="phrase">Я тебя очень люблю</div>
+  <button class="phrase-btn" id="phrase-btn">Ещё раз</button>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="heart">— с любовью, только для тебя —</div>
+  <div class="sig">Сделано <b>вручную</b> · <b>2026</b></div>
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   ЗВЁЗДЫ НА ФОНЕ
+   ============================================================ */
+(function makeStars(){
+  const host = document.getElementById('stars');
+  const count = window.innerWidth < 700 ? 90 : 180;
+  for (let i = 0; i < count; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = Math.random() < 0.88 ? 1 : 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.animationDelay = Math.random() * 5 + 's';
+    s.style.animationDuration = (3 + Math.random() * 3) + 's';
+    host.appendChild(s);
+  }
+})();
+
+/* ============================================================
+   ДАТЫ И КОНСТАНТЫ
+   ============================================================ */
+const MET_DATE      = new Date('2025-03-09T00:00:00');
+const START_DATE    = new Date('2025-07-04T00:00:00');
+const MOVE_IN_DATE  = new Date('2028-06-01T00:00:00');
+
+// Скорость света и световой год
+const KM_PER_SEC = 299792.458;                    // км/с
+const KM_PER_LY  = 9.4607304725808e12;            // км в одном световом году
+const PROXIMA_LY = 4.2465;                        // расстояние до Проксимы Центавра
+
+/* ============================================================
+   УТИЛИТЫ
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const pad2 = n => String(n).padStart(2, '0');
+const fmtInt = n => n.toLocaleString('ru-RU');
+
+/* ============================================================
+   ГЛАВНЫЙ СЧЁТЧИК ВРЕМЕНИ
+   ============================================================ */
+function updateLive(){
+  const now = Date.now();
+
+  // --- Дни с начала отношений ---
+  const diffMs = now - START_DATE.getTime();
+  const totalSec = Math.floor(diffMs / 1000);
+  const days  = Math.floor(totalSec / 86400);
+  const hours = Math.floor((totalSec % 86400) / 3600);
+  const mins  = Math.floor((totalSec % 3600) / 60);
+  const secs  = totalSec % 60;
+
+  $('days').textContent = fmtInt(days);
+  $('hours').textContent = pad2(hours);
+  $('minutes').textContent = pad2(mins);
+  $('seconds').textContent = pad2(secs);
+
+  // --- Световой путь ---
+  const kmTravelled = totalSec * KM_PER_SEC;
+  const lyTravelled = kmTravelled / KM_PER_LY;
+
+  $('light-years').textContent = lyTravelled.toFixed(4);
+  $('light-km').textContent = fmtInt(Math.round(kmTravelled));
+
+  const proxPct = Math.min(100, (lyTravelled / PROXIMA_LY) * 100);
+  $('light-progress').textContent = proxPct.toFixed(2).replace('.', ',') + '%';
+  // Прогресс-бар устанавливаем один раз, чтобы не дёргался
+  const bar = $('light-bar');
+  if (bar.dataset.done !== '1'){
+    setTimeout(() => { bar.style.width = proxPct + '%'; bar.dataset.done = '1'; }, 300);
+  }
+
+  // --- Обратный отсчёт до переезда ---
+  const leftMs = MOVE_IN_DATE.getTime() - now;
+  if (leftMs <= 0){
+    $('cd-days').textContent = '0';
+    $('cd-hours').textContent = '00';
+    $('cd-minutes').textContent = '00';
+    $('cd-seconds').textContent = '00';
+  } else {
+    const ls = Math.floor(leftMs / 1000);
+    $('cd-days').textContent    = fmtInt(Math.floor(ls / 86400));
+    $('cd-hours').textContent   = pad2(Math.floor((ls % 86400) / 3600));
+    $('cd-minutes').textContent = pad2(Math.floor((ls % 3600) / 60));
+    $('cd-seconds').textContent = pad2(ls % 60);
+  }
+}
+
+updateLive();
+setInterval(updateLive, 1000);
+
+/* ============================================================
+   ГЕНЕРАТОР МИЛЫХ ФРАЗ
+   ============================================================ */
+const PHRASES = [
+  'Я тебя очень люблю',
+  'Я всегда буду рядом',
+  'Я тебя обожаю',
+  'Затискаю тебя скоро',
+  'Я всегда только твой'
+];
+let lastPhraseIdx = -1;
+const phraseEl = $('phrase');
+const phraseBtn = $('phrase-btn');
+
+function nextPhrase(){
+  let idx = lastPhraseIdx;
+  while (idx === lastPhraseIdx){
+    idx = Math.floor(Math.random() * PHRASES.length);
+  }
+  lastPhraseIdx = idx;
+
+  phraseEl.classList.add('fade');
+  setTimeout(() => {
+    phraseEl.textContent = PHRASES[idx];
+    phraseEl.classList.remove('fade');
+  }, 350);
+}
+
+phraseBtn.addEventListener('click', nextPhrase);
+
+/* Автосмена каждые 6 секунд — как маленькое чудо само по себе */
+setInterval(nextPhrase, 6000);
+
+/* ============================================================
+   ПЛАВНОЕ ПОЯВЛЕНИЕ СЕКЦИЙ
+   ============================================================ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){
+      e.target.classList.add('on');
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.15});
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
